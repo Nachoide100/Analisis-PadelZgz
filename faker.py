@@ -429,28 +429,32 @@ def calcular_probabilidad_ocupacion(hora, es_fin_de_semana, tipo_pista):
     if not es_fin_de_semana:
         if hora < "13:30":
             prob_base = 0.25      # Mañanas laborables: 25% ocupación
-        elif "13:30" <= hora < "17:00":
-            prob_base = 0.40      # Hora de comer: 40% ocupación
+        elif "13:30" <= hora < "15:00":
+            prob_base = 0.15     
+        elif "15:00" <= hora <  "17:00":
+            prop_base = 0.35
         elif "17:00" <= hora < "21:00":
-            prob_base = 0.90      # HORA PICO (Tardes): 90% ocupación (¡casi todo lleno!)
+            prob_base = 0.95      # HORA PICO (Tardes): 90% ocupación (¡casi todo lleno!)
         else:
-            prob_base = 0.60      # Noches (21:30 en adelante): 60%
+            prob_base = 0.50     # Noches (21:30 en adelante): 60%
             
     # B) Probabilidad por Fin de Semana (Sábados y Domingos)
     else:
         if hora < "10:00":
-            prob_base = 0.40      # Sábados muy pronto: 40%
+            prob_base = 0.60      
         elif "10:00" <= hora < "14:00":
             prob_base = 0.85      # Mañanas de finde: 85% ocupación
-        elif "14:00" <= hora < "18:00":
-            prob_base = 0.50      # Siesta/Tarde temprana: 50%
+        elif "14:00" <= hora < "16:00":
+            prob_base = 0.10      
+        elif "16:00" <= hora < "18:00":
+            prob_base = 0.35      
         else:
-            prob_base = 0.65      # Tardes/Noche de finde: 65%
+            prob_base = 0.50      # Tardes/Noche de finde: 65%
 
     # C) Modificador por Tipo de Pista (Zaragoza es ventosa/fría)
     # Penalizamos ligeramente las pistas exteriores porque la gente prefiere indoor
     if tipo_pista == "Exterior":
-        prob_base -= 0.15 
+        prob_base -= 0.10 
         
     # Asegurarnos de que la probabilidad no salga de [0, 1]
     return max(0.0, min(1.0, prob_base))
