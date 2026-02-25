@@ -1,7 +1,12 @@
 # 🎾 Padel Data Analytics & Revenue Management (Zaragoza)
 
 ## 📌 Visión General del Proyecto
-Este es un proyecto *End-to-End* de Ingeniería y Análisis de Datos centrado en el modelo de negocio de los clubes de pádel en la ciudad de Zaragoza y sus alrededores. La verdad que es últimamente mis amigos y yo siempre estamos mirando a ver a qué pista y a qué hora podemos ir para que nos salga más barato. Asi pues, con estes 
+Este es un proyecto *End-to-End* de Ingeniería y Análisis de Datos centrado en el modelo de negocio de los clubes de pádel en la ciudad de Zaragoza y sus alrededores. La verdad que es últimamente mis amigos y yo siempre estamos mirando a ver a qué pista y a qué hora podemos ir para que nos salga más barato. Asi pues, con este proyecto buscaba, en principio un objetivo, pero que luego fueron dos: 
+  1. Investigar y analizar los precios de las pistas de los clubes de padel en Zaragoza para poder, de un vistazo, saber dónde y cuándo es más rentable jugar.
+  2. Ya que estábamos, analizar el mercado padelístico en mi ciudad y ver, a través del análisis de datos, si podia proponer alguna mejora económica a algún club (de la cual pudiera salir yo también beneficiado jeje).
+
+Espero que os guste! La verdad que lo yo lo he disfrutado bastante y me he llevado alguna sorpresa (el próximo finde creao que cambiaremos de pista de juego jajaa). 
+
 
 ## 🛠️ Stack Tecnológico
 
@@ -21,7 +26,7 @@ Este es un proyecto *End-to-End* de Ingeniería y Análisis de Datos centrado en
 
 ## 🏗️ Fases del Proyecto y Arquitectura
 
-### 1. Recopilación de Datos Base (Mapeo Manual)
+### 1. 🔍 Recopilación de Datos Base (Mapeo Manual)
 Para garantizar la precisión del modelo de negocio, la primera fase consistió en un trabajo de investigación y recolección manual. 
 * Se mapearon los principales clubes de Zaragoza y su área metropolitana.
 * Se estructuraron las franjas horarias operativas de cada centro.
@@ -29,12 +34,12 @@ Para garantizar la precisión del modelo de negocio, la primera fase consistió 
 
 (Esto lo tuve que hacer manualmente porque Playtomic tenía una gran defensa anti - scrapping asi que si alguien quiere los datos están en el .csv de PAPAPADEL.)
 
-### 2. Simulación de Demanda Algorítmica (Python)
+### 2. 🎲 Simulación de Demanda Algorítmica (Python)
 Ante la imposibilidad de extraer datos transaccionales privados de los clubes, se desarrolló un script en Python para generar un *dataset* sintético de reservas de alta fidelidad para un periodo de **dos semanas**.
 * **Modelos Probabilísticos:** Los datos no son aleatorios. Se programaron lógicas de probabilidad basadas en el comportamiento real del consumidor (ej. mayor probabilidad de reservas en horario de tarde/noche en días laborales, y picos de ocupación matinal en fines de semana).
 * **Variables generadas:** ID de reserva, club, fechas, horas, estado (Libre/Ocupada) e ingresos generados vs. potenciales.
 
-### 3. Capa Semántica y Data Warehouse (PostgreSQL)
+### 3. 🗄️ Capa Semántica y Data Warehouse (PostgreSQL)
 Los datos brutos generados se ingirieron en una base de datos relacional para realizar el trabajo pesado de transformación y agregación antes de la visualización.
 * **DDL y Tablas:** Creación de la tabla principal optimizando los tipos de datos.
 ```sql
@@ -134,7 +139,7 @@ GROUP BY
 ```
 ---
 
-### 4. Diseño del Dashboard y UI/UX
+### 4. 🎨 Diseño del Dashboard y UI/UX
 Se ha diseñado un Cuadro de Mando interactivo con estética "Premium", dividido en páginas orientadas a diferentes perfiles de negocio:
 
 * **Página 1: Visión General (Perfil Directivo/Inversor)**
@@ -177,3 +182,8 @@ El objetivo final de este modelo de datos no es solo descriptivo, sino **prescri
 * 🚨 **4. Recuperación de Ingresos: El modelo "Última hora"**
   * **El Dato:** De los 244.000€ de facturación potencial, solo se capturaron 120.000€, dejando **124.000€ de Lost Revenue** (dinero perdido por pistas vacías).
   * **La Acción:** Considerar cada pista no vendida como un coste hundido. Se propone implementar alertas de **Último Minuto (90 mins antes) con un 50% de descuento** automatizadas vía App, Telegram o WhatsApp. El coste marginal es cero y transforma un agujero financiero en beneficio neto.
+
+---
+Perfil -> [Perfil](https://github.com/Nachoide100/Nachoide100.git)
+
+Contacto -> [LinkedIn](https://www.linkedin.com/in/jos%C3%A9-ignacio-rubio-194471308/)
