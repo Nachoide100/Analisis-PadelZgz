@@ -1,12 +1,21 @@
-.# 🎾 Padel Data Analytics & Revenue Management (Zaragoza)
+# 🎾 Padel Data Analytics & Revenue Management (Zaragoza)
 
 ## 📌 Visión General del Proyecto
-Este es un proyecto *End-to-End* de Ingeniería y Análisis de Datos centrado en el modelo de negocio de los clubes de pádel en la ciudad de Zaragoza y sus alrededores. El objetivo principal es construir una arquitectura de datos completa para analizar la ocupación, la eficiencia operativa y el coste de oportunidad (*Lost Revenue*), aplicando técnicas de Business Intelligence.
+Este es un proyecto *End-to-End* de Ingeniería y Análisis de Datos centrado en el modelo de negocio de los clubes de pádel en la ciudad de Zaragoza y sus alrededores. La verdad que es últimamente mis amigos y yo siempre estamos mirando a ver a qué pista y a qué hora podemos ir para que nos salga más barato. Asi pues, con estes 
 
 ## 🛠️ Stack Tecnológico
-* **Generación de Datos:** Python (Pandas, Numpy, Random/Probabilidad).
-* **Base de Datos & Capa Semántica:** PostgreSQL.
-* **Business Intelligence & UI:** Power BI (DAX, Modelado Relacional).
+
+**Extracción y Simulación de Datos** <br>
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/Numpy-777BB4?style=for-the-badge&logo=numpy&logoColor=white)
+
+**Base de Datos & Capa Semántica** <br>
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+
+**Business Intelligence & UI/UX** <br>
+![Power BI](https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)
+![DAX](https://img.shields.io/badge/DAX-00599C?style=for-the-badge&logo=microsoft&logoColor=white)
 
 ---
 
@@ -123,13 +132,9 @@ WHERE
 GROUP BY 
     Club, Tipo_Pista;
 ```
+---
 
-### 4. Modelado y BI (Power BI & DAX)
-Conexión directa entre Power BI y PostgreSQL para la ingesta del modelo tabular.
-* **Modelo en Estrella:** Creación de una tabla `Calendario` dinámica en DAX para garantizar el correcto flujo de los filtros temporales y evitar relaciones de *Muchos a Muchos*.
-* **Lenguaje DAX:** Desarrollo de Nuevas Columnas (para categorización de franjas comerciales y tipos de días aplicando la Máxima de Roche) y Medidas dinámicas (Porcentaje de ocupación real iterativo, Ticket medio, etc.) adaptables al *Contexto de Filtro*.
-
-### 5. Diseño del Dashboard y UI/UX
+### 4. Diseño del Dashboard y UI/UX
 Se ha diseñado un Cuadro de Mando interactivo con estética "Premium", dividido en páginas orientadas a diferentes perfiles de negocio:
 
 * **Página 1: Visión General (Perfil Directivo/Inversor)**
@@ -153,7 +158,22 @@ Se ha diseñado un Cuadro de Mando interactivo con estética "Premium", dividido
 
 ---
 
-## 📂 Estructura del Repositorio
-* `/scripts_python`: Código fuente de la simulación probabilística de reservas.
-* `/sql`: Scripts DDL de creación de tablas y las consultas SQL de las vistas.
-* `/powerbi`: (Opcional) Archivo `.pbix` o capturas de pantalla del Dashboard en alta resolución.
+## 💡 Top 5 Business Insights y Conclusiones (Propuestas de Valor)
+
+El objetivo final de este modelo de datos no es solo descriptivo, sino **prescriptivo**. Tras analizar la ocupación y el *Lost Revenue*, se proponen las siguientes 5 estrategias de *Revenue Management* aplicables a los clubes analizados:
+
+* 📉 **1. Estrategia de Precio Dinámico para Mañanas laborales**
+  * **El Dato:** Las mañanas de diario (antes de las 14:00h) sufren una ocupación crítica.
+  * **La Acción:** Crear una "Tarifa Plana Matinal" o bonos especiales con un 30% de descuento. Esto permite cubrir costes fijos (luz, alquiler) atrayendo a nichos con flexibilidad horaria (estudiantes, freelancers), sin sobrecargar las horas premium.
+
+* 📈 **2. Optimización del precio en Horas Pico**
+  * **El Dato:** A partir de las 17:00h (L-V), la ocupación se dispara, llegando al límite de capacidad entre las 18:00h y las 20:30h.
+  * **La Acción:** Al existir una demanda inelástica, se recomienda aplicar **Precios Dinámicos** en esos huecos premium. Hay clubes que ya lo hacen pero otros (por ejemplo el Forus Aragonia) mantiene la misma tarifa para todas sus pistas a lo largo del día, lo que evita reservar matinales (demasiado caro) y no aprovecha las horas pico. 
+
+* 🏆 **3. Rescate de las Tardes de Fin de Semana**
+  * **El Dato:** El fin de semana invierte la tendencia: las mañanas son fuertes, pero las tardes sufren una caída severa de demanda.
+  * **La Acción:** Rellenar este valle de 14:00h a 18:00h pivotando de vender "pistas sueltas" a vender "eventos".Organizar torneos "Americanas", competiciones mixtas o días familiares para solucionar la fricción del usuario a la hora de organizar partidos en ese horario.
+
+* 🚨 **4. Recuperación de Ingresos: El modelo "Última hora"**
+  * **El Dato:** De los 244.000€ de facturación potencial, solo se capturaron 120.000€, dejando **124.000€ de Lost Revenue** (dinero perdido por pistas vacías).
+  * **La Acción:** Considerar cada pista no vendida como un coste hundido. Se propone implementar alertas de **Último Minuto (90 mins antes) con un 50% de descuento** automatizadas vía App, Telegram o WhatsApp. El coste marginal es cero y transforma un agujero financiero en beneficio neto.
